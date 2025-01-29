@@ -40,7 +40,7 @@ public class TopServlet extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		boolean isShowMessageForm = false;
 		User user = (User) request.getSession().getAttribute("loginUser");

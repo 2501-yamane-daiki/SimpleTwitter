@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
+
 import chapter6.beans.User;
 import chapter6.exception.NoRowsUpdatedRuntimeException;
 import chapter6.exception.SQLRuntimeException;
@@ -36,7 +38,7 @@ public class UserDao {
 	public void insert(Connection connection, User user) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
@@ -79,7 +81,7 @@ public class UserDao {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
@@ -114,7 +116,7 @@ public class UserDao {
 	private List<User> toUsers(ResultSet rs) throws SQLException {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		List<User> users = new ArrayList<User>();
 		try {
@@ -140,7 +142,7 @@ public class UserDao {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
@@ -172,29 +174,48 @@ public class UserDao {
 	public void update(Connection connection, User user) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("UPDATE users SET ");
-			sql.append("    account = ?, ");
-			sql.append("    name = ?, ");
-			sql.append("    email = ?, ");
-			sql.append("    password = ?, ");
-			sql.append("    description = ?, ");
-			sql.append("    updated_date = CURRENT_TIMESTAMP ");
-			sql.append("WHERE id = ?");
+			String password = user.getPassword();
 
-			ps = connection.prepareStatement(sql.toString());
+			if (!StringUtils.isEmpty(password)) {
+				sql.append("UPDATE users SET ");
+				sql.append("    account = ?, ");
+				sql.append("    name = ?, ");
+				sql.append("    email = ?, ");
+				sql.append("    password = ?, ");
+				sql.append("    description = ?, ");
+				sql.append("    updated_date = CURRENT_TIMESTAMP ");
+				sql.append("WHERE id = ?");
 
-			ps.setString(1, user.getAccount());
-			ps.setString(2, user.getName());
-			ps.setString(3, user.getEmail());
-			ps.setString(4, user.getPassword());
-			ps.setString(5, user.getDescription());
-			ps.setInt(6, user.getId());
+				ps = connection.prepareStatement(sql.toString());
 
+				ps.setString(1, user.getAccount());
+				ps.setString(2, user.getName());
+				ps.setString(3, user.getEmail());
+				ps.setString(4, user.getPassword());
+				ps.setString(5, user.getDescription());
+				ps.setInt(6, user.getId());
+			} else {
+				sql.append("UPDATE users SET ");
+				sql.append("    account = ?, ");
+				sql.append("    name = ?, ");
+				sql.append("    email = ?, ");
+				sql.append("    description = ?, ");
+				sql.append("    updated_date = CURRENT_TIMESTAMP ");
+				sql.append("WHERE id = ?");
+
+				ps = connection.prepareStatement(sql.toString());
+
+				ps.setString(1, user.getAccount());
+				ps.setString(2, user.getName());
+				ps.setString(3, user.getEmail());
+				ps.setString(4, user.getDescription());
+				ps.setInt(5, user.getId());
+			}
 			int count = ps.executeUpdate();
 			if (count == 0) {
 				log.log(Level.SEVERE,"更新対象のレコードが存在しません", new NoRowsUpdatedRuntimeException());
