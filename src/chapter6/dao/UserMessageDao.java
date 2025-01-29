@@ -55,7 +55,7 @@ public class UserMessageDao {
 			sql.append("ORDER BY created_date DESC limit " +  num);
 			ps = connection.prepareStatement(sql.toString());
 			if (id != null) {
-				ps.setInt(1,id);
+				ps.setInt(1, id);
 			}
 			ResultSet rs = ps.executeQuery();
 
