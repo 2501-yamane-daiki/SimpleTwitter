@@ -33,7 +33,7 @@ public class MessageService {
 	public void insert(Message message) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		Connection connection = null;
 		try {
@@ -56,7 +56,7 @@ public class MessageService {
 	public List<UserMessage> select() {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		final int LIMIT_NUM = 1000;
 

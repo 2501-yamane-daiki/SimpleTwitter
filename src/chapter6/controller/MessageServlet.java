@@ -43,7 +43,7 @@ public class MessageServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		HttpSession session = request.getSession();
 		List<String> errorMessages = new ArrayList<String>();
@@ -68,7 +68,7 @@ public class MessageServlet extends HttpServlet {
 	private boolean isValid(String text, List<String> errorMessages) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		if (StringUtils.isBlank(text)) {
 			errorMessages.add("メッセージを入力してください");

@@ -119,7 +119,7 @@ public class UserService {
 		Connection connection = null;
 		try {
 			String password = user.getPassword();
-			if (!StringUtils.isEmpty(password)) {
+			if (!StringUtils.isBlank(password)) {
 				// パスワード暗号化
 				String encPassword = CipherUtil.encrypt(user.getPassword());
 				user.setPassword(encPassword);
@@ -140,7 +140,5 @@ public class UserService {
 			close(connection);
 		}
 	}
-
-
 
 }

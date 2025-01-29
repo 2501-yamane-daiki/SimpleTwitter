@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		String accountOrEmail = request.getParameter("accountOrEmail");
 		String password = request.getParameter("password");

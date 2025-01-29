@@ -31,7 +31,7 @@ public class MessageDao {
 	public void insert(Connection connection, Message message) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {

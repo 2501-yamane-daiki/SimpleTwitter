@@ -40,7 +40,7 @@ public class SignUpServlet  extends HttpServlet {
 			throws IOException, ServletException {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
@@ -51,7 +51,7 @@ public class SignUpServlet  extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		List<String> errorMessages = new ArrayList<String>();
 
@@ -70,7 +70,7 @@ public class SignUpServlet  extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		User user = new User();
 		user.setName(request.getParameter("name"));
@@ -85,7 +85,7 @@ public class SignUpServlet  extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		String name = user.getName();
 		String account = user.getAccount();

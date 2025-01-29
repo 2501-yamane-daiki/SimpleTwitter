@@ -181,25 +181,7 @@ public class UserDao {
 			StringBuilder sql = new StringBuilder();
 			String password = user.getPassword();
 
-			if (!StringUtils.isEmpty(password)) {
-				sql.append("UPDATE users SET ");
-				sql.append("    account = ?, ");
-				sql.append("    name = ?, ");
-				sql.append("    email = ?, ");
-				sql.append("    password = ?, ");
-				sql.append("    description = ?, ");
-				sql.append("    updated_date = CURRENT_TIMESTAMP ");
-				sql.append("WHERE id = ?");
 
-				ps = connection.prepareStatement(sql.toString());
-
-				ps.setString(1, user.getAccount());
-				ps.setString(2, user.getName());
-				ps.setString(3, user.getEmail());
-				ps.setString(4, user.getPassword());
-				ps.setString(5, user.getDescription());
-				ps.setInt(6, user.getId());
-			} else {
 				sql.append("UPDATE users SET ");
 				sql.append("    account = ?, ");
 				sql.append("    name = ?, ");
@@ -207,7 +189,9 @@ public class UserDao {
 				sql.append("    description = ?, ");
 				sql.append("    updated_date = CURRENT_TIMESTAMP ");
 				sql.append("WHERE id = ?");
-
+				if (!StringUtils.isBlank(password)) {
+					sql.append("    password = ?, ");
+				}
 				ps = connection.prepareStatement(sql.toString());
 
 				ps.setString(1, user.getAccount());
@@ -215,7 +199,9 @@ public class UserDao {
 				ps.setString(3, user.getEmail());
 				ps.setString(4, user.getDescription());
 				ps.setInt(5, user.getId());
-			}
+				if (!StringUtils.isBlank(password)) {
+					ps.setString(6, user.getPassword());
+				}
 			int count = ps.executeUpdate();
 			if (count == 0) {
 				log.log(Level.SEVERE,"更新対象のレコードが存在しません", new NoRowsUpdatedRuntimeException());
