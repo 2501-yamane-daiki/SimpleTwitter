@@ -42,7 +42,7 @@ public class SettingServlet  extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
@@ -57,7 +57,7 @@ public class SettingServlet  extends HttpServlet {
 			throws ServletException, IOException {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		HttpSession session = request.getSession();
 		List<String> errorMessages = new ArrayList<String>();
@@ -87,7 +87,7 @@ public class SettingServlet  extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		User user = new User();
 		user.setId(Integer.parseInt(request.getParameter("id")));
@@ -103,12 +103,11 @@ public class SettingServlet  extends HttpServlet {
 
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		String name = user.getName();
 		String account = user.getAccount();
 		String email = user.getEmail();
-
 		if (!StringUtils.isEmpty(name) && (20 < name.length())) {
 			errorMessages.add("名前は20文字以下で入力してください");
 		}
@@ -119,6 +118,11 @@ public class SettingServlet  extends HttpServlet {
 		}
 		if (!StringUtils.isEmpty(email) && (50 < email.length())) {
 			errorMessages.add("メールアドレスは50文字以下で入力してください");
+		}
+		User accounts = new UserService().select(account);
+
+		if((accounts != null) && (accounts.getId() != user.getId())) {
+			errorMessages.add("ユーザーが重複しています");
 		}
 
 		if (errorMessages.size() != 0) {
