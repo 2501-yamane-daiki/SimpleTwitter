@@ -30,7 +30,7 @@ public class MessageDao {
 
 	public void insert(Connection connection, Message message) {
 
-		log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
+		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
@@ -52,6 +52,28 @@ public class MessageDao {
 
 			ps.setInt(1, message.getUserId());
 			ps.setString(2, message.getText());
+
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+	public void delete(Connection connection, String deleteMessage) {
+
+		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM messages  WHERE id = ? ;" );
+
+			ps = connection.prepareStatement(sql.toString());
+
+			ps.setString(1, deleteMessage);
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
