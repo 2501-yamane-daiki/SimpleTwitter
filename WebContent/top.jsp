@@ -22,7 +22,6 @@
 				<a href="setting">設定</a>
 				<a href="logout">ログアウト</a>
 			</c:if>
-
 		</div>
 		<c:if test="${ not empty loginUser }">
 			<div class="profile">
@@ -66,9 +65,9 @@
 		<c:forEach items="${messages}" var="message">
 			<div class="message">
 				<div class="account-name">
-					<span class="account">
-					<a href="./?user_id=<c:out value="${message.userId}"/> ">
-					 	<c:out	value="${message.account}" />
+					<span class="account"> <a
+						href="./?user_id=<c:out value="${message.userId}"/> "> <c:out
+								value="${message.account}" />
 					</a>
 					</span> <span class="name"><c:out value="${message.name}" /></span>
 				</div>
@@ -78,12 +77,23 @@
 				<div class="date">
 					<fmt:formatDate value="${message.createdDate}"
 						pattern="yyyy/MM/dd HH:mm:ss" />
+						<!--編集ボタン作成、editServletに-->
+					<div>
 						<c:if test="${  loginUser.account == message.account }">
-						<form action="Deletemessage" method="post">
-						<input name="id" value="${message.id}" id="id" type="hidden"/>
-						<br /> <input type="submit" value="削除">
-						</form>>
+							<form action="edit" method="get">
+								<input name="id" value="${message.id}" id="id" type="hidden" />
+								<br /> <input type="submit" value="編集">
+							</form>
 						</c:if>
+					</div>
+					<div>
+						<c:if test="${  loginUser.account == message.account }">
+							<form action="deletemessage" method="post">
+								<input name="id" value="${message.id}" id="id" type="hidden" />
+								<br /> <input type="submit" value="削除">
+							</form>
+						</c:if>
+					</div>
 				</div>
 			</div>
 		</c:forEach>

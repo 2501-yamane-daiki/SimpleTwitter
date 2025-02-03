@@ -106,8 +106,9 @@ a.profile .account {
 	font-weight: lighter;
 	color: gray;
 	font: small-caption;
-}
+	display: flex;
 
+}
 .copyright {
 	width: 250px;
 	margin: 0 auto;

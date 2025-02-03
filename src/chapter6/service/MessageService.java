@@ -120,4 +120,52 @@ public class MessageService {
 			close(connection);
 		}
 	}
+	public List<Message> edit(String editMessage) {
+
+		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
+				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		//メッセージDaoに変数を渡す
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			List<Message> editMessages = new MessageDao().edit(connection, editMessage);
+			commit(connection);
+			return editMessages ;
+
+		} catch (RuntimeException e) {
+			rollback(connection);
+			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+	public void update(Message editMessage) {
+
+		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
+				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+
+		Connection connection = null;
+
+		try {
+			connection = getConnection();
+			new MessageDao().update(connection, editMessage);
+			commit(connection);
+		} catch (RuntimeException e) {
+			rollback(connection);
+			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
 }
