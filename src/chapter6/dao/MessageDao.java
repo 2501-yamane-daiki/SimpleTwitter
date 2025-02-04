@@ -34,7 +34,7 @@ public class MessageDao {
 	public void insert(Connection connection, Message message) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
@@ -67,7 +67,7 @@ public class MessageDao {
 	public void delete(Connection connection, String deleteMessage) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
@@ -100,7 +100,11 @@ public class MessageDao {
 			ResultSet rs = ps.executeQuery();
 			List<Message> messages = toMessages(rs);
 			//リストをメッセージサーバーへ
-			return messages;
+			if (messages.isEmpty()) {
+				return null;
+			} else {
+				return messages;
+			}
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
 			throw new SQLRuntimeException(e);
@@ -133,13 +137,13 @@ public class MessageDao {
 	public void update(Connection connection, Message editMessage) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 
-			sql.append("UPDATE message SET ");
+			sql.append("UPDATE messages SET ");
 			sql.append("    text = ?, ");
 			sql.append("    updated_date = CURRENT_TIMESTAMP ");
 			sql.append("WHERE id = ?");

@@ -72,12 +72,12 @@
 					</span> <span class="name"><c:out value="${message.name}" /></span>
 				</div>
 				<div class="text">
-					<c:out value="${message.text}" />
+					<pre><c:out value="${message.text}" /></pre>
 				</div>
 				<div class="date">
 					<fmt:formatDate value="${message.createdDate}"
 						pattern="yyyy/MM/dd HH:mm:ss" />
-						<!--編集ボタン作成、editServletに-->
+					<!--編集ボタン作成、editServletに-->
 					<div>
 						<c:if test="${  loginUser.account == message.account }">
 							<form action="edit" method="get">
