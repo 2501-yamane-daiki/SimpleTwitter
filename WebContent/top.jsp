@@ -79,7 +79,7 @@
 						pattern="yyyy/MM/dd HH:mm:ss" />
 					<!--編集ボタン作成、editServletに-->
 					<div>
-						<c:if test="${  loginUser.account == message.account }">
+						<c:if test="${loginUser.id == message.userId}">
 							<form action="edit" method="get">
 								<input name="id" value="${message.id}" id="id" type="hidden" />
 								<br /> <input type="submit" value="編集">
@@ -87,7 +87,7 @@
 						</c:if>
 					</div>
 					<div>
-						<c:if test="${  loginUser.account == message.account }">
+						<c:if test="${loginUser.id == message.userId}">
 							<form action="deletemessage" method="post">
 								<input name="id" value="${message.id}" id="id" type="hidden" />
 								<br /> <input type="submit" value="削除">

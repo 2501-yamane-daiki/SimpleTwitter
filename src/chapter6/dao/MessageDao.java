@@ -64,7 +64,7 @@ public class MessageDao {
 			close(ps);
 		}
 	}
-	public void delete(Connection connection, String deleteMessage) {
+	public void delete(Connection connection, int messageId) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
@@ -76,7 +76,7 @@ public class MessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, deleteMessage);
+			ps.setInt(1, messageId);
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -87,7 +87,7 @@ public class MessageDao {
 		}
 	}
 	//DBから編集するカラムを取得
-	public  List<Message> edit(Connection connection, String editMessage) {
+	public  Message edit(Connection connection, int messageId) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -95,7 +95,7 @@ public class MessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, editMessage);
+			ps.setInt(1, messageId);
 
 			ResultSet rs = ps.executeQuery();
 			List<Message> messages = toMessages(rs);
@@ -103,7 +103,7 @@ public class MessageDao {
 			if (messages.isEmpty()) {
 				return null;
 			} else {
-				return messages;
+				return messages.get(0);
 			}
 		} catch (SQLException e) {
 			log.log(Level.SEVERE, new Object(){}.getClass().getEnclosingClass().getName() + " : " + e.toString(), e);
@@ -118,7 +118,7 @@ public class MessageDao {
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 		//取得したカラムをlistに入れる　public  List<Message> editに返す
-		List<Message> messages = new ArrayList<Message>();
+		List<Message> messages = new ArrayList <Message>();
 		try {
 			while (rs.next()) {
 				Message editMessage = new Message();

@@ -36,12 +36,12 @@ public class DeleteMessageServlet  extends HttpServlet {
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		//top/jpsわたしたidを受け取る
-		String id = request.getParameter("id");
+		int messageId = Integer.parseInt(request.getParameter("id"));
 
 		//mdssage.Serviseのdeleteに値を渡したい
 
 
-		new MessageService().delete(id);
+		new MessageService().delete(messageId);
 		response.sendRedirect("./");
 	}
 

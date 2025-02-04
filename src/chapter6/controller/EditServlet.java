@@ -51,7 +51,7 @@ public class EditServlet extends HttpServlet {
 			session.setAttribute("errorMessages", errorMessages);
 			response.sendRedirect("./");
 			return;
-		//idが数学以外の場合
+			//idが数学以外の場合
 		} else if (!id.matches("^[0-9]*$")) {
 			errorMessages.add("不正なパラメータが入力されました");
 			session.setAttribute("errorMessages", errorMessages);
@@ -59,23 +59,20 @@ public class EditServlet extends HttpServlet {
 			return;
 		}
 
+		int messageId = Integer.parseInt(id);
+
 		//message.Serviseのeditに値を渡したい
-		List<Message> editMessages = new MessageService().edit(id);
+		Message editMessages = new MessageService().edit(messageId);
+
 		//dbに同じidがない場合
-		if ( editMessages == null)  {
+		if (editMessages == null)  {
 			errorMessages.add("不正なパラメータが入力されました");
 			session.setAttribute("errorMessages", errorMessages);
 			response.sendRedirect("./");
 			return;
 		}
 
-		//edit.jspに返す？
-		if (errorMessages.size() != 0) {
-			session.setAttribute("errorMessages", errorMessages);
-			response.sendRedirect("./");
-			return;
-		}
-		request.setAttribute("editMessages", editMessages);
+		request.setAttribute("editMessage", editMessages);
 		request.getRequestDispatcher("/edit.jsp").forward(request, response);
 
 	}
@@ -94,14 +91,13 @@ public class EditServlet extends HttpServlet {
 
 		int messageId = Integer.parseInt(id);
 
-		if (!isValid( text, errorMessages)) {
+		if (!isValid(text, errorMessages)) {
 			session.setAttribute("errorMessages", errorMessages);
 			Message editMessage = new Message();
 			editMessage.setText(text);
 			editMessage.setId(messageId);
-			List<Message> editMessages = new ArrayList<>();
-			editMessages.add(editMessage);
-			request.setAttribute("editMessages",editMessages );
+
+			request.setAttribute("editMessage",editMessage);
 			request.getRequestDispatcher("edit.jsp").forward(request, response);
 			return;
 		}

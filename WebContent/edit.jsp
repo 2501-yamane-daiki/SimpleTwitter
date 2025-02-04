@@ -21,15 +21,13 @@
 			<c:remove var="errorMessages" scope="session" />
 		</c:if>
 		<form action="edit" method="post">
-			<c:forEach items="${editMessages}" var="editMessage">
 				<br />
-				<input name="id" value="${editMessage.id}" id=id type="hidden" />
+				<input name="id" value="${editMessage.id}" type="hidden" />
 				つぶやく<br />
 				<!--編集前のメッセージを表示-->
 				<textarea name="text" cols="100" rows="5" class="tweet-box">${editMessage.text}</textarea>
 				<br />
 				<input type="submit" value="編集">（140文字まで）
-		</c:forEach>
 		</form>
 	</div>
 	<br />

@@ -98,7 +98,7 @@ public class MessageService {
 			close(connection);
 		}
 	}
-	public void delete(String deleteMessage) {
+	public void delete(int messageId) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
@@ -106,7 +106,7 @@ public class MessageService {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			new MessageDao().delete(connection, deleteMessage);
+			new MessageDao().delete(connection, messageId);
 			commit(connection);
 		} catch (RuntimeException e) {
 			rollback(connection);
@@ -120,7 +120,7 @@ public class MessageService {
 			close(connection);
 		}
 	}
-	public List<Message> edit(String editMessage) {
+	public Message edit(int messageId) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
@@ -128,7 +128,7 @@ public class MessageService {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			List<Message> editMessages = new MessageDao().edit(connection, editMessage);
+			Message editMessages = new MessageDao().edit(connection, messageId);
 			commit(connection);
 			return editMessages ;
 
