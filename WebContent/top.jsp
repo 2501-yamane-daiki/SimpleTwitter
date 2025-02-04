@@ -94,6 +94,13 @@
 							</form>
 						</c:if>
 					</div>
+					<form action="comment" method="post">
+						返信<br />
+						<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
+						<input name="id" value="${message.id}" id="id" type="hidden" />
+						<br /> <input type="submit" value="返信">（140文字まで）
+					</form>
+
 				</div>
 			</div>
 		</c:forEach>
