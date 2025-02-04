@@ -1,0 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>つぶやきの編集</title>
+</head>
+<body>
+	<div class="editMessages">
+		<c:if test="${ not empty errorMessages }">
+			<div class="errorMessages">
+				<ul>
+					<c:forEach items="${errorMessages}" var="errorMessage">
+						<li><c:out value="${errorMessage}" />
+					</c:forEach>
+				</ul>
+			</div>
+			<c:remove var="errorMessages" scope="session" />
+		</c:if>
+		<form action="edit" method="post">
+			<c:forEach items="${editMessages}" var="editMessage">
+				<br />
+				<input name="id" value="${editMessage.id}" id=id type="hidden" />
+				つぶやく<br />
+				<!--編集前のメッセージを表示-->
+				<textarea name="text" cols="100" rows="5" class="tweet-box">${editMessage.text}</textarea>
+				<br />
+				<input type="submit" value="編集">（140文字まで）
+		</c:forEach>
+		</form>
+	</div>
+	<br />
+	<a href="./">戻る</a>
+
+	<div class="copyright">Copyright(c)trainee0994</div>
+</body>
+</html>

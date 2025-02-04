@@ -35,7 +35,7 @@ public class MessageService {
 	public void insert(Message message) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		Connection connection = null;
 		try {
@@ -58,7 +58,7 @@ public class MessageService {
 	public List<UserMessage> select(String userId) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		final int LIMIT_NUM = 1000;
 
@@ -101,7 +101,7 @@ public class MessageService {
 	public void delete(String deleteMessage) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		Connection connection = null;
 		try {
@@ -123,7 +123,7 @@ public class MessageService {
 	public List<Message> edit(String editMessage) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 		//メッセージDaoに変数を渡す
 		Connection connection = null;
 		try {
@@ -147,7 +147,7 @@ public class MessageService {
 	public void update(Message editMessage) {
 
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
-				" : " + new Object(){}.getClass().getEnclosingMethod().getName());
+		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
 		Connection connection = null;
 
