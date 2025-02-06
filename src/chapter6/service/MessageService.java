@@ -83,7 +83,6 @@ public class MessageService {
 			 * idがnullだったら全件取得する
 			 * idがnull以外だったら、その値に対応するユーザーIDの投稿を取得する
 			 */
-			Date nowDate = new Date();
 			String startSet = null;
 			String endSet = null;
 			if(! StringUtils.isBlank(start)) {
@@ -94,6 +93,7 @@ public class MessageService {
 			if(! StringUtils.isBlank(end)) {
 				endSet = end  + " 23:59:59";
 			} else {
+				Date nowDate = new Date();
 				endSet = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(nowDate);
 			}
 			List<UserMessage> messages = new UserMessageDao().select(connection, id, LIMIT_NUM,  startSet, endSet);
