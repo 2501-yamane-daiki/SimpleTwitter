@@ -52,7 +52,6 @@ public class TopServlet extends HttpServlet {
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
 		String userId = request.getParameter("user_id");
-		//int commentUserId = user.getId();
 		List<UserMessage> messages = new MessageService().select(userId, start, end);
 		List<UserComment> comments = new CommentService().select();
 		request.setAttribute("start", start);
