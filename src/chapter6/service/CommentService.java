@@ -56,8 +56,6 @@ public class CommentService {
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
-
-
 		Connection connection = null;
 		connection = getConnection();
 

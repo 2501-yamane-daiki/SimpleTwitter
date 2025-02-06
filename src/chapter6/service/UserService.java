@@ -32,7 +32,6 @@ public class UserService {
 
 	public void insert(User user) {
 
-
 		log.info(new Object(){}.getClass().getEnclosingClass().getName() +
 		" : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
