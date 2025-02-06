@@ -18,6 +18,7 @@
 				<ul>
 					<c:forEach items="${errorMessages}" var="errorMessage">
 						<li><c:out value="${errorMessage}" />
+						<c:remove var="errorMessages" scope="session" />
 					</c:forEach>
 				</ul>
 			</div>
@@ -28,7 +29,7 @@
 				name="accountOrEmail" id="accountOrEmail" /> <br /> <label
 				for="password">パスワード</label> <input name="password" type="password"
 				id="password" /> <br /> <input type="submit" value="ログイン" /> <br />
-			<a href="./">戻る<c:remove var="errorMessages" scope="session" /></a>
+			<a href="./">戻る</a>
 		</form>
 
 		<div class="copyright">Copyright(c)trainee0944</div>
