@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import chapter6.beans.User;
+import chapter6.beans.UserComment;
 import chapter6.beans.UserMessage;
 import chapter6.logging.InitApplication;
+import chapter6.service.CommentService;
 import chapter6.service.MessageService;
 
 @WebServlet(urlPatterns = { "/index.jsp" })
@@ -44,13 +46,18 @@ public class TopServlet extends HttpServlet {
 
 		boolean isShowMessageForm = false;
 		User user = (User) request.getSession().getAttribute("loginUser");
-		if (user != null) {
+		if(user != null) {
 			isShowMessageForm = true;
 		}
-
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
 		String userId = request.getParameter("user_id");
-		List<UserMessage> messages = new MessageService().select(userId);
-
+		//int commentUserId = user.getId();
+		List<UserMessage> messages = new MessageService().select(userId, start, end);
+		List<UserComment> comments = new CommentService().select();
+		request.setAttribute("start", start);
+		request.setAttribute("end", end);
+		request.setAttribute("comments", comments);
 		request.setAttribute("messages", messages);
 		request.setAttribute("isShowMessageForm", isShowMessageForm);
 		request.getRequestDispatcher("/top.jsp").forward(request, response);
