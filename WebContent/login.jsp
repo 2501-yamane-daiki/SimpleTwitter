@@ -28,7 +28,7 @@
 				name="accountOrEmail" id="accountOrEmail" /> <br /> <label
 				for="password">パスワード</label> <input name="password" type="password"
 				id="password" /> <br /> <input type="submit" value="ログイン" /> <br />
-			<a href="./">戻る</a>
+			<a href="./">戻る<c:remove var="errorMessages" scope="session" /></a>
 		</form>
 
 		<div class="copyright">Copyright(c)trainee0944</div>
